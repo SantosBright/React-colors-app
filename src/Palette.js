@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Navbar from './Navbar';
 import ColorBox from './ColorBox';
 import './Palette.css';
 
@@ -10,7 +11,7 @@ class Palette extends Component {
 
         return (
             <div className="Palette">
-                {/* Navbar goes here */}
+                <Navbar />
                 <div className="Palette-colors">{colorBoxes}</div>
                 {/* footer enventually*/}
             </div>
