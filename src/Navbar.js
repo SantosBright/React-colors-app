@@ -12,7 +12,13 @@ class Navbar extends Component {
                     <a href="/">reactcolorpicker</a>
                 </div>
                 <div className="slider">
-                    <Slider />
+                    <Slider
+                        defaultValue={this.props.level}
+                        min={100}
+                        max={900}
+                        step={100}
+                        onAfterChange={this.props.changeLevel}
+                    />
                 </div>
             </header>
         )
