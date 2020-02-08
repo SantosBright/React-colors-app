@@ -53,7 +53,5 @@ class App extends Component {
     }
 }
 
-{/* <Palette palette={generatePalette(seedColors[1])} /> */}
-
 
 export default App;
