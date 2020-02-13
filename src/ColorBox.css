@@ -10,7 +10,7 @@
 .SingleColorPalette .ColorBox{
     height: 50%;
 } */
-.ColorBox.go-back{
+/* .ColorBox.go-back{
     background-color: black;
 }
 .copy-button,
@@ -33,7 +33,7 @@
     text-transform: uppercase;
     transition: opacity .3s ease-out;
     text-decoration: none;
-}
+} */
 /* .copy-button{
     opacity: 0;
 }
