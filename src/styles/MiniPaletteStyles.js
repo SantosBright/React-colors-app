@@ -12,10 +12,13 @@ export default {
     },
     colors: {
         backgroundColor: '#dae1e3',
-        height: '150px',
+        height: '9.3rem',
         width: '100%',
         borderRadius: '5px',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start'
     },
     title: {
         display: 'flex',
@@ -35,8 +38,8 @@ export default {
         height: '25%',
         width: '20%',
         display: 'inline-block',
-        margin: '0 auto',
+        margin: '0',
         position: 'relative',
-        marginBottom: '-4px'
+        marginBottom: '0'
     }
 }
