@@ -1,8 +1,7 @@
 {
-  "name": "warbler_client",
+  "name": "react-colors",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8081",
   "dependencies": {
     "@material-ui/core": "^4.8.3",
     "@material-ui/icons": "^4.5.1",
