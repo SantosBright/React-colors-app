@@ -12,6 +12,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import useStyles from './styles/PaletteFormStyles';
 import { Button } from '@material-ui/core';
+import DraggableColorBox from './DraggableColorBox';
 
 
 export default function PersistentDrawerLeft() {
@@ -103,11 +104,9 @@ export default function PersistentDrawerLeft() {
             })}
         >
             <div className={classes.drawerHeader} />
-            <ul>
-              {colors.map(color => (
-                <li style={{backgroundColor: color }} >{color}</li>
-              ))}
-            </ul>
+            {colors.map(color => (
+              <DraggableColorBox color={color} />
+            ))}
         </main>
     </div>
   );
