@@ -17,6 +17,8 @@ import { Button } from '@material-ui/core';
 export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [currentColor, setCurrentColor] = React.useState("teal");
+  const [colors, setColors] = React.useState(["teal", "skyblue", "#a429f0", "#62c5ef"]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -25,6 +27,14 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleColorChange = newColor => {
+    setCurrentColor(newColor.hex);
+  }
+
+  const addColor = () => {
+    setColors([...colors, currentColor]);
+  }
 
   return (
     <div className={classes.root}>
@@ -75,10 +85,15 @@ export default function PersistentDrawerLeft() {
             </Button>
         </div>
         <ChromePicker
-            color="red"
-            onChangeComplete={newColor => console.log(newColor)}
+            color={currentColor}
+            onChangeComplete={handleColorChange}
         />
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: currentColor }}
+          onClick={addColor}
+        >
             Add Color
         </Button>
         </Drawer>
@@ -88,6 +103,11 @@ export default function PersistentDrawerLeft() {
             })}
         >
             <div className={classes.drawerHeader} />
+            <ul>
+              {colors.map(color => (
+                <li style={{backgroundColor: color }} >{color}</li>
+              ))}
+            </ul>
         </main>
     </div>
   );
