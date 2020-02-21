@@ -13,13 +13,15 @@ import { ChromePicker } from 'react-color';
 import useStyles from './styles/PaletteFormStyles';
 import { Button } from '@material-ui/core';
 import DraggableColorBox from './DraggableColorBox';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [currentColor, setCurrentColor] = React.useState("teal");
-  const [colors, setColors] = React.useState(["teal", "skyblue", "#a429f0", "#62c5ef"]);
+  const [newColorName, setNewColorName] = React.useState("");
+  const [colors, setColors] = React.useState([]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -33,8 +35,27 @@ export default function PersistentDrawerLeft() {
     setCurrentColor(newColor.hex);
   }
 
-  const addColor = () => {
-    setColors([...colors, currentColor]);
+  const addNewColor = () => {
+    const newColor = {
+      color: currentColor,
+      name: newColorName
+    }
+    setColors([...colors, newColor]);
+  }
+
+  const handleNewColorChange = e => {
+    setNewColorName(e.target.value);
+  }
+
+  const handleSubmit = () => {
+    let newName = 'New Test Palette';
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, "-"),
+      colors
+    };
+    props.savePalette(newPalette);
+    props.history.push('/');
   }
 
   return (
@@ -42,6 +63,7 @@ export default function PersistentDrawerLeft() {
       <CssBaseline />
       <AppBar
         position="fixed"
+        color="default"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
@@ -59,6 +81,13 @@ export default function PersistentDrawerLeft() {
           <Typography variant="h6" noWrap>
             Persistent drawer
           </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+          >
+            Save Palette
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -89,14 +118,22 @@ export default function PersistentDrawerLeft() {
             color={currentColor}
             onChangeComplete={handleColorChange}
         />
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ backgroundColor: currentColor }}
-          onClick={addColor}
-        >
+        <ValidatorForm onSubmit={addNewColor}>
+          <TextValidator
+            value={newColorName}
+            onChange={handleNewColorChange}
+            validators={['required']}
+            errorMessages={['this is field is required']}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ backgroundColor: currentColor }}
+            type="submit"
+          >
             Add Color
-        </Button>
+          </Button>
+        </ValidatorForm>
         </Drawer>
         <main
             className={clsx(classes.content, {
@@ -105,7 +142,10 @@ export default function PersistentDrawerLeft() {
         >
             <div className={classes.drawerHeader} />
             {colors.map(color => (
-              <DraggableColorBox color={color} />
+              <DraggableColorBox
+                color={color.color}
+                name={color.name}
+              />
             ))}
         </main>
     </div>
