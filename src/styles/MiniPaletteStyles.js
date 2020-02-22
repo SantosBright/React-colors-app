@@ -15,10 +15,7 @@ export default {
         height: '9.3rem',
         width: '100%',
         borderRadius: '5px',
-        overflow: 'hidden',
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'flex-start'
+        overflow: 'hidden'
     },
     title: {
         display: 'flex',
@@ -40,6 +37,6 @@ export default {
         display: 'inline-block',
         margin: '0',
         position: 'relative',
-        marginBottom: '0'
+        marginBottom: '-0.3rem'
     }
 }
