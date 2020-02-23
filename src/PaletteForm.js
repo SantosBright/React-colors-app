@@ -12,8 +12,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import useStyles from './styles/PaletteFormStyles';
 import { Button } from '@material-ui/core';
-import DraggableColorBox from './DraggableColorBox';
+import DraggableColorList from './DraggableColorList';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { arrayMove } from 'react-sortable-hoc';
 
 
 export default function PersistentDrawerLeft(props) {
@@ -85,6 +86,12 @@ export default function PersistentDrawerLeft(props) {
   const handleDeleteColor = name => {
     let newColors = colors.filter(color => color.name !== name);
     setColors(newColors);
+  }
+
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setColors(({ colors }) => ({
+      colors: arrayMove(colors, oldIndex, newIndex)
+    }));
   }
 
   return (
@@ -181,19 +188,17 @@ export default function PersistentDrawerLeft(props) {
         </ValidatorForm>
         </Drawer>
         <main
-            className={clsx(classes.content, {
-            [classes.contentShift]: open,
-            })}
+          className={clsx(classes.content, {
+          [classes.contentShift]: open,
+          })}
         >
-            <div className={classes.drawerHeader} />
-            {colors.map(color => (
-              <DraggableColorBox
-                color={color.color}
-                name={color.name}
-                key={color.name}
-                handleDeleteColor={handleDeleteColor.bind(this, color.name)}
-              />
-            ))}
+          <div className={classes.drawerHeader} />
+          <DraggableColorList
+            colors={colors}
+            handleDeleteColor={handleDeleteColor}
+            axis="xy"
+            onSortEnd={onSortEnd}
+          />
         </main>
     </div>
   );
