@@ -17,12 +17,12 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { arrayMove } from 'react-sortable-hoc';
 
 
-export default function PersistentDrawerLeft(props) {
+export default function PaletteForm(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [currentColor, setCurrentColor] = React.useState("teal");
   const [newColorName, setNewColorName] = React.useState("");
-  const [colors, setColors] = React.useState([]);
+  const [colors, setColors] = React.useState(props.palettes[0].colors);
   const [newPaletteName, setNewPaletteName] = React.useState('');
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function PersistentDrawerLeft(props) {
   }
 
   const addNewColor = () => {
-    const newColor = {
+    let newColor = {
       color: currentColor,
       name: newColorName
     }
@@ -94,6 +94,17 @@ export default function PersistentDrawerLeft(props) {
     }));
   }
 
+  const clearColors = () => {
+    setColors([]);
+  }
+
+  const randomColor = () => {
+    let allColors = props.palettes.map(p => p.colors).flat();
+    let rand = Math.floor(Math.random() * allColors.length);
+    let randColor = allColors[rand];
+    setColors([...colors, randColor]);
+  }
+  const isPaletteFull = colors.length >= props.maxColors;
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -155,10 +166,19 @@ export default function PersistentDrawerLeft(props) {
         <Divider />
         <Typography variant="h4">Design Your Palette</Typography>
         <div>
-            <Button variant="contained" color="secondary">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={clearColors}
+            >
                 CLEAR PALETTE
             </Button>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={randomColor}
+              disabled={isPaletteFull}
+            >
                 RANDOM COLOR
             </Button>
         </div>
@@ -180,10 +200,13 @@ export default function PersistentDrawerLeft(props) {
           <Button
             variant="contained"
             color="primary"
-            style={{ backgroundColor: currentColor }}
+            style={{ backgroundColor: isPaletteFull ? 
+              'grey' : currentColor
+            }}
             type="submit"
+            disabled={isPaletteFull}
           >
-            Add Color
+            {isPaletteFull ? 'Palette Full' : 'Add Color'}
           </Button>
         </ValidatorForm>
         </Drawer>
@@ -202,4 +225,8 @@ export default function PersistentDrawerLeft(props) {
         </main>
     </div>
   );
+}
+
+PaletteForm.defaultProps = {
+  maxColors: 20
 }
