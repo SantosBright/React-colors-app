@@ -8,7 +8,7 @@ const DraggableColorList = SortableContainer(({ colors, handleDeleteColor }) => 
           index={i}
           color={color.color}
           name={color.name}
-          key={color.name}
+          key={`${color.name}-${i}`}
           handleDeleteColor={handleDeleteColor.bind(this, color.name)}
         />
     ));
