@@ -1,60 +1,29 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { ChromePicker } from 'react-color';
 import useStyles from './styles/PaletteFormStyles';
 import { Button } from '@material-ui/core';
 import DraggableColorList from './DraggableColorList';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import arrayMove from 'array-move';
 import PaletteFormNav from './PaletteFormNav';
+import ColorPickerForm from './ColorPickerForm';
 
 
 export default function PaletteForm(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const [currentColor, setCurrentColor] = React.useState("teal");
+  const [currentColor] = React.useState("teal");
   const [newColorName, setNewColorName] = React.useState("");
   const [newPaletteName, setNewPaletteName] = React.useState("");
   const [colors, setColors] = React.useState(props.palettes[0].colors);
 
-  useEffect(() => {
-    ValidatorForm.addValidationRule('isColorNameUnique', value => (
-      colors.every(({ name }) => (
-        name.toLowerCase() !== value.toLowerCase()
-      ))
-    ));
-    ValidatorForm.addValidationRule('isColorUnique', value => (
-      colors.every(({ color }) => (
-        color.toLowerCase() !== currentColor.toLowerCase()
-      ))
-    ));
-  });
-
-  const handleColorChange = newColor => {
-    setCurrentColor(newColor.hex);
-  }
-
-  const addNewColor = () => {
-    let newColor = {
-      color: currentColor,
-      name: newColorName
-    }
+  const addNewColor = newColor => {
     setColors([...colors, newColor]);
-    setNewColorName("");
-  }
-
-  const handleNewColorChange = e => {
-    setNewColorName(e.target.value);
   }
 
   const handlePaletteNameChange = e => {
@@ -145,33 +114,14 @@ export default function PaletteForm(props) {
                 RANDOM COLOR
             </Button>
         </div>
-        <ChromePicker
-            color={currentColor}
-            onChangeComplete={handleColorChange}
+        <ColorPickerForm 
+          isPaletteFull={isPaletteFull}
+          addNewColor={addNewColor}
+          currentColor={currentColor}
+          newColorName={newColorName}
+          setNewColorName={setNewColorName}
+          colors={colors}
         />
-        <ValidatorForm onSubmit={addNewColor}>
-          <TextValidator
-            value={newColorName}
-            onChange={handleNewColorChange}
-            validators={['required', 'isColorNameUnique', 'isColorUnique']}
-            errorMessages={[
-              'this is field is required',
-              'Color name is already taken',
-              'Color already used'
-            ]}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ backgroundColor: isPaletteFull ? 
-              'grey' : currentColor
-            }}
-            type="submit"
-            disabled={isPaletteFull}
-          >
-            {isPaletteFull ? 'Palette Full' : 'Add Color'}
-          </Button>
-        </ValidatorForm>
         </Drawer>
         <main
           className={clsx(classes.content, {
