@@ -74,7 +74,6 @@ export default function PaletteForm(props) {
     <div className={classes.root}>
       <PaletteFormNav
         open={open}
-        classes={classes}
         palettes={props.palettes}
         newPaletteName={newPaletteName}
         handleSubmit={handleSubmit}
