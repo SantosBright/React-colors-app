@@ -95,12 +95,19 @@ export default function PaletteForm(props) {
             </IconButton>
         </div>
         <Divider />
-        <Typography variant="h4">Design Your Palette</Typography>
-        <div>
+        <div className={classes.container}>
+          <Typography
+            variant="h5"
+            gutterBottom
+          >
+            Design Your Palette
+          </Typography>
+          <div className={classes.buttons}>
             <Button
               variant="contained"
               color="secondary"
               onClick={clearColors}
+              className={classes.btn}
             >
                 CLEAR PALETTE
             </Button>
@@ -109,18 +116,20 @@ export default function PaletteForm(props) {
               color="primary"
               onClick={randomColor}
               disabled={isPaletteFull}
+              className={classes.btn}
             >
                 RANDOM COLOR
             </Button>
+          </div>
+          <ColorPickerForm 
+            isPaletteFull={isPaletteFull}
+            addNewColor={addNewColor}
+            currentColor={currentColor}
+            newColorName={newColorName}
+            setNewColorName={setNewColorName}
+            colors={colors}
+          />
         </div>
-        <ColorPickerForm 
-          isPaletteFull={isPaletteFull}
-          addNewColor={addNewColor}
-          currentColor={currentColor}
-          newColorName={newColorName}
-          setNewColorName={setNewColorName}
-          colors={colors}
-        />
         </Drawer>
         <main
           className={clsx(classes.content, {

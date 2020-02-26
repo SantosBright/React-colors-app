@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 
-const drawerWidth = 300;
+const drawerWidth = 340;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0,
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: drawerWidth
   },
   drawerHeader: {
     display: 'flex',
@@ -58,6 +58,21 @@ const useStyles = makeStyles(theme => ({
     }),
     marginLeft: 0,
   },
+  container: {
+    width: '90%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '0 auto'
+  },
+  buttons: {
+    width: '100%'
+  },
+  btn: {
+    width: '50%'
+  }
 }));
 
 export default useStyles;

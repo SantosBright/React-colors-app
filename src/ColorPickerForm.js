@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { withStyles } from '@material-ui/core';
 import { ChromePicker } from 'react-color';
 import { Button } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import styles from './styles/ColorPickerFormStyles';
 
 const ColorPickerForm = props => {
-    const { addNewColor, isPaletteFull, colors } = props;
+    const { addNewColor, isPaletteFull, colors, classes } = props;
     const [currentColor, setCurrentColor] = useState("teal");
     const [newColorName, setNewColorName] = useState("");
 
@@ -43,11 +45,16 @@ const ColorPickerForm = props => {
             <ChromePicker
                 color={currentColor}
                 onChangeComplete={handleColorChange}
+                className={classes.picker}
             />
             <ValidatorForm onSubmit={handleSubmit}>
                 <TextValidator
                     value={newColorName}
                     onChange={handleNewColorChange}
+                    variant="filled"
+                    margin="normal"
+                    placeholder="Color Name"
+                    className={classes.colorInput}
                     validators={['required', 'isColorNameUnique', 'isColorUnique']}
                     errorMessages={[
                         'this is field is required',
@@ -63,6 +70,7 @@ const ColorPickerForm = props => {
                     }}
                     type="submit"
                     disabled={isPaletteFull}
+                    className={classes.addColor}
                 >
                     {isPaletteFull ? 'Palette Full' : 'Add Color'}
                 </Button>
@@ -71,4 +79,4 @@ const ColorPickerForm = props => {
     );
 }
 
-export default ColorPickerForm;
+export default withStyles(styles)(ColorPickerForm);
