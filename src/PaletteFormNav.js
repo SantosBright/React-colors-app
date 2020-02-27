@@ -20,6 +20,10 @@ function PaletteFormNav({ open, palettes, handleDrawerOpen, handleSubmit }) {
         setFormShowing(true);
     }
 
+    const hideForm = () => {
+        setFormShowing(false);
+    }
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -67,6 +71,7 @@ function PaletteFormNav({ open, palettes, handleDrawerOpen, handleSubmit }) {
                 <PaletteMetaForm
                     palettes={palettes}
                     handleSubmit={handleSubmit}
+                    hideForm={hideForm}
                 />
             }
         </div>
