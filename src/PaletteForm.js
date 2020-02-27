@@ -19,17 +19,12 @@ export default function PaletteForm(props) {
   const [open, setOpen] = React.useState(true);
   const [currentColor] = React.useState("teal");
   const [newColorName, setNewColorName] = React.useState("");
-  const [newPaletteName, setNewPaletteName] = React.useState("");
   const [colors, setColors] = React.useState(props.palettes[0].colors);
 
   const addNewColor = newColor => {
     setColors([...colors, newColor]);
   }
-
-  const handlePaletteNameChange = e => {
-    setNewPaletteName(e.target.value);
-  }
-
+  
   const handleSubmit = newPaletteName => {
     let newName = newPaletteName;
     const newPalette = {
@@ -75,10 +70,8 @@ export default function PaletteForm(props) {
       <PaletteFormNav
         open={open}
         palettes={props.palettes}
-        newPaletteName={newPaletteName}
         handleSubmit={handleSubmit}
         handleDrawerOpen={handleDrawerOpen}
-        handlePaletteNameChange={handlePaletteNameChange}
       />
       <Drawer
         className={classes.drawer}
@@ -109,7 +102,7 @@ export default function PaletteForm(props) {
               onClick={clearColors}
               className={classes.btn}
             >
-                CLEAR PALETTE
+              CLEAR PALETTE
             </Button>
             <Button
               variant="contained"
@@ -118,7 +111,7 @@ export default function PaletteForm(props) {
               disabled={isPaletteFull}
               className={classes.btn}
             >
-                RANDOM COLOR
+              RANDOM COLOR
             </Button>
           </div>
           <ColorPickerForm 
