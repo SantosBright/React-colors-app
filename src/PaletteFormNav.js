@@ -14,6 +14,11 @@ import PaletteMetaForm from './PaletteMetaForm';
 
 function PaletteFormNav({ open, palettes, handleDrawerOpen, handleSubmit }) {
     const classes = useStyles();
+    const [formShowing, setFormShowing] = React.useState(false);
+
+    const showForm = () => {
+        setFormShowing(true);
+    }
 
     return (
         <div className={classes.root}>
@@ -40,17 +45,30 @@ function PaletteFormNav({ open, palettes, handleDrawerOpen, handleSubmit }) {
                     </Typography>
                 </Toolbar>
                 <div className={classes.navBtns}>
-                    <PaletteMetaForm
-                        palettes={palettes}
-                        handleSubmit={handleSubmit}
-                    />
                     <Link to="/">
-                        <Button variant="contained" color="secondary">
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            className={classes.button}
+                        >
                             Go Back
                         </Button>
                     </Link>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={showForm}
+                    >
+                        save
+                    </Button>
                 </div>
             </AppBar>
+            {formShowing && 
+                <PaletteMetaForm
+                    palettes={palettes}
+                    handleSubmit={handleSubmit}
+                />
+            }
         </div>
     )
 }

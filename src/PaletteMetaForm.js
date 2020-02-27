@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -9,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 export default function FormDialog({ palettes, handleSubmit }) {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
     const [paletteName, setPaletteName] = React.useState("");
 
     const handleClickOpen = () => {
@@ -34,44 +33,44 @@ export default function FormDialog({ palettes, handleSubmit }) {
 
     return (
         <div>
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                Open form dialog
-            </Button>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="form-dialog-title"
+            >
                 <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-                <DialogContent>
-                <DialogContentText>
-                    To subscribe to this website, please enter your email address here. We will send updates
-                    occasionally.
-                </DialogContentText>
                 <ValidatorForm onSubmit={handleSubmit.bind(this, paletteName)}>
-                    <TextValidator
-                        onChange={handleChange}
-                        label="Palette Name"
-                        value={paletteName}
-                        validators={['required', 'isPaletteNameUnique']}
-                        errorMessages={[
-                        'Palette name is required',
-                        'Palette name already taken'
-                        ]}
-                    />
-                    <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    >
-                        Save Palette
-                    </Button>
+                    <DialogContent>
+                        <DialogContentText>
+                            Please 😉 enter a name for your beautiful👩 Palette. Make sure its unique!✨.
+                        </DialogContentText>
+                            <TextValidator
+                                onChange={handleChange}
+                                fullWidth
+                                margin="normal"
+                                label="Palette Name"
+                                value={paletteName}
+                                validators={['required', 'isPaletteNameUnique']}
+                                errorMessages={[
+                                'Palette name is required',
+                                'Palette name already taken'
+                                ]}
+                            />
+                        
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                            Cancel
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                        >
+                            Save Palette
+                        </Button>
+                    </DialogActions>
                 </ValidatorForm>
-                </DialogContent>
-                <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                    Cancel
-                </Button>
-                <Button onClick={handleClose} color="primary">
-                    Subscribe
-                </Button>
-                </DialogActions>
             </Dialog>
         </div>
     );

@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
     }),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '64px'
+    height: '64px',
+    alignItems: 'center'
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -27,7 +28,15 @@ const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  navBtns: {}
+  navBtns: {
+    marginRight: '1rem',
+    '& a': {
+      textDecoration: 'none'
+    }
+  },
+  button: {
+    margin: '0 .5rem'
+  }
 }));
 
 export default useStyles;

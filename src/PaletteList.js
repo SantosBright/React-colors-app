@@ -23,7 +23,7 @@ class PaletteList extends Component {
                             <MinPalette
                                {...palette}
                                handleClick={() => this.goToPalette(palette.id)}
-                               key={palettze.id}
+                               key={palette.id}
                             />
                         ))}
                     </div>
