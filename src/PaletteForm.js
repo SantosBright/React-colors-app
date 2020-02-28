@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import useStyles from './styles/PaletteFormStyles';
@@ -83,7 +82,6 @@ export default function PaletteForm(props) {
                 <ChevronLeftIcon />
             </IconButton>
         </div>
-        <Divider />
         <div className={classes.container}>
           <Typography
             variant="h5"
