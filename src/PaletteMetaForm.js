@@ -10,11 +10,24 @@ import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 
 export default function FormDialog({ palettes, handleSubmit, hideForm }) {
-    const [open, setOpen] = React.useState(true);
+    const [stage, setStage] = React.useState("name");
     const [paletteName, setPaletteName] = React.useState("");
 
     const handleChange =  e => {
         setPaletteName(e.target.value);
+    }
+
+    const showEmojiPicker = () => {
+        setStage("emoji");
+    }
+
+    const savePalette = emoji => {
+        console.log(emoji.native);
+        let newPalette = {
+            paletteName,
+            emoji: emoji.native
+        };
+        handleSubmit(newPalette);
     }
 
     useEffect(() => {
@@ -27,18 +40,29 @@ export default function FormDialog({ palettes, handleSubmit, hideForm }) {
 
     return (
         <div>
+            <Dialog onClose={hideForm} open={stage === 'emoji'}>
+                <DialogTitle id="form-dialog-title">Choose an Emoji</DialogTitle>
+                <Picker
+                    title="Pick a Palette Emoji"
+                    onSelect={savePalette}
+                    darkMode={false}
+                />
+            </Dialog>
             <Dialog
-                open={open}
+                open={stage === 'name'}
                 onClose={hideForm}
                 aria-labelledby="form-dialog-title"
             >
                 <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-                <ValidatorForm onSubmit={handleSubmit.bind(this, paletteName)}>
+                <ValidatorForm onSubmit={showEmojiPicker}>
                     <DialogContent>
                         <DialogContentText>
-                            Please 😉 enter a name for your beautiful👩 Palette. Make sure its unique!✨.
+                            Please 
+                            <span role="img" aria-label="jsx-a11y/accessible-emoji">😉</span> 
+                            enter a name for your beautiful
+                            <span role="img" aria-label="jsx-a11y/accessible-emoji">👩</span> 
+                            Palette. Make sure its unique!<span role="img" aria-label="jsx-a11y/accessible-emoji">✨</span>.
                         </DialogContentText>
-                        <Picker />
                         <TextValidator
                             onChange={handleChange}
                             fullWidth
@@ -47,8 +71,8 @@ export default function FormDialog({ palettes, handleSubmit, hideForm }) {
                             value={paletteName}
                             validators={['required', 'isPaletteNameUnique']}
                             errorMessages={[
-                            'Palette name is required',
-                            'Palette name already taken'
+                                'Palette name is required',
+                                'Palette name already taken'
                             ]}
                         />
                         
