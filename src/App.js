@@ -36,6 +36,17 @@ class App extends Component {
         }, this.syncLocalStorage);
     }
     
+    deletePalette = id => {
+        let newPalette = this.state.palettes.filter(p => (
+            p.id !== id
+        ));
+
+        this.setState(
+            { palettes: newPalette }, 
+            this.syncLocalStorage
+        );
+    }
+
     render() {
         return (
             <Switch>
@@ -46,6 +57,7 @@ class App extends Component {
                         <PaletteList
                             palettes={this.state.palettes}
                             {...routeProps}
+                            deletePalette={this.deletePalette}
                         />
                     )}
                 />
