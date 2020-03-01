@@ -129,6 +129,7 @@ export default function PaletteForm(props) {
             handleDeleteColor={handleDeleteColor}
             axis="xy"
             onSortEnd={onSortEnd}
+            distance={10}
           />
         </main>
     </div>
