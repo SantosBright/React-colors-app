@@ -1,17 +1,43 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Link } from 'react-router-dom';
 import MinPalette from './MiniPalette';
-import styles from './styles/PaletteListStyles';
+import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import CloseIcon from '@material-ui/icons/Close';
+import CheckIcon from '@material-ui/icons/Check';
+import useStyles from './styles/PaletteListStyles';
+import { blue, red } from '@material-ui/core/colors';
 
 
 function PaletteList(props) {
-    const { palettes, classes, deletePalette } = props;
+    const [open, setOpen] = React.useState(false);
+    const [deleteId, setDeleteId] = React.useState("");
+    const classes = useStyles();
+    const { palettes } = props;
 
     const goToPalette = id => {
         props.history.push(`/palette/${id}`);
     }
+
+    const handleOpen = id => {
+        setOpen(true);
+        setDeleteId(id);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleDelete = () => {
+        props.deletePalette(deleteId);
+        handleClose();
+    };
 
     return (
         <div className={classes.root}>
@@ -31,14 +57,45 @@ function PaletteList(props) {
                                 {...palette}
                                 handleClick={() => goToPalette(palette.id)}
                                 key={palette.id}
-                                deletePalette={deletePalette}
+                                handleOpen={handleOpen}
                             />
                         </CSSTransition>
                     ))}
                 </TransitionGroup>
             </div>
+            <Dialog onClose={handleClose} aria-labelledby="delete-dialog-title" open={open}>
+                <DialogTitle id="delete-dialog-title">Delete this Palette?</DialogTitle>
+                <List>
+                    <ListItem button onClick={handleDelete}>
+                        <ListItemAvatar>
+                            <Avatar
+                                style={{
+                                    backgroundColor: blue[100],
+                                    color: blue[600]
+                                }}
+                            >
+                                <CheckIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Delete" />
+                    </ListItem>
+                    <ListItem button onClick={handleClose}>
+                        <ListItemAvatar>
+                            <Avatar
+                                style={{
+                                    backgroundColor: red[100],
+                                    color: red[600]
+                                }}
+                            >
+                                <CloseIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Cancel" />
+                    </ListItem>
+                </List>
+            </Dialog>
         </div>
     );
 }
 
-export default withStyles(styles)(PaletteList);
+export default PaletteList;

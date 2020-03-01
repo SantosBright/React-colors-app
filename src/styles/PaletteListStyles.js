@@ -1,4 +1,12 @@
-export default {
+import { makeStyles } from '@material-ui/core/styles';
+import { blue } from '@material-ui/core/colors';
+
+
+export default makeStyles({
+    avatar: {
+      backgroundColor: blue[100],
+      color: blue[600],
+    },
     "@global": {
         '.fade-exit': {
             opacity: '1'
@@ -39,4 +47,4 @@ export default {
         gridTemplateColumns: 'repeat(3, 30%)',
         gridGap: '5%'
     }
-};
+});
