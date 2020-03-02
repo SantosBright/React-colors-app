@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/styles';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import { withStyles } from '@material-ui/styles';
 import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
 import styles from './styles/NavbarStyles';
+import 'rc-slider/assets/index.css';
+
 
 class Navbar extends Component {
     constructor(props){
@@ -27,6 +28,7 @@ class Navbar extends Component {
 
     render() {
         const { level, changeLevel, showSlider, classes } = this.props;
+        const { colorFormat, showing } = this.state;
         return (
             <header className={classes.Navbar}>
                 <div className={classes.logo}>
@@ -47,7 +49,7 @@ class Navbar extends Component {
                     </div>
                 )}
                 <div className={classes.selectContainer}>
-                    <Select value={this.state.colorFormat} onChange={this.handleFormatChange} >
+                    <Select value={colorFormat} onChange={this.handleFormatChange} >
                         <MenuItem value="hex">HEX - #45ed84</MenuItem>
                         <MenuItem value="rgb">RGB - rgb(255,80,1)</MenuItem>
                         <MenuItem value="rgba">RGBA - rgba(201,209,30,0.8)</MenuItem>
@@ -55,9 +57,9 @@ class Navbar extends Component {
                 </div>
                 <Snackbar
                     anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
-                    open={this.state.showing}
+                    open={showing}
                     autoHideDuration={3000}
-                    message={<span>Format Changed To {this.state.colorFormat.toUpperCase()} </span>}
+                    message={<span>Format Changed To {colorFormat.toUpperCase()} </span>}
                     ContentProps={{
                         "aria-describedby": "message-id"
                     }}
@@ -74,7 +76,7 @@ class Navbar extends Component {
                     ]}
                 />
             </header>
-        )
+        );
     }
 }
 

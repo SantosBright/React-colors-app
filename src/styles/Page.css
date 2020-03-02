@@ -3,7 +3,7 @@
     position: fixed;
     width: 100%;
     top: 0;
-    transition: opacity .5s ease-in-out, transform 10s ease-in-out;
+    transition: opacity .5s ease-in-out, transform .3s ease-in-out;
 }
 .page-enter {
     opacity: 0;
@@ -17,12 +17,14 @@
 
 .rtl.page-enter {
     transform: translateX(100%);
+    opacity: 1;
 }
 .rtl.page-enter-active{
     transform: translateX(0);
 }
 .rtl.page-exit-active{
     transform: translateX(-100%);
+    opacity: 1;
 }
 
 .ltr.page-enter {

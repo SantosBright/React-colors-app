@@ -44,7 +44,7 @@ class ColorBox extends Component {
                     )}
                 </div>
             </CopyToClipboard>
-        )
+        );
     }
 }
 

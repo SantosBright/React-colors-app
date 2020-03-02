@@ -33,7 +33,7 @@ class SingleColorPalette extends Component {
 
     render() {
         const { paletteName, emoji, id } = this.props.palette;
-        const { classes, handleDirection } = this.props;
+        const { classes } = this.props;
         const colorBoxes = this._shades.map(color => (
             <ColorBox
                 key={color.name}
@@ -65,7 +65,7 @@ class SingleColorPalette extends Component {
                     emoji={emoji}
                 />
             </div>
-        )
+        );
     }
 }
 

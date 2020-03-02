@@ -1,14 +1,13 @@
 import React from 'react';
+import arrayMove from 'array-move';
 import clsx from 'clsx';
+import { Button } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import useStyles from './styles/PaletteFormStyles';
-import { Button } from '@material-ui/core';
 import DraggableColorList from './DraggableColorList';
-import arrayMove from 'array-move';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
 import seedColors from './seedColors';
@@ -45,10 +44,22 @@ export default function PaletteForm(props) {
     setColors([]);
   }
 
-  const randomColor = () => {
+  const addRandomColor = () => {
     let allColors = props.palettes.map(p => p.colors).flat();
-    let rand = Math.floor(Math.random() * allColors.length);
-    let randColor = allColors[rand];
+    let rand;
+    let randColor;
+    let isDuplicateColor = true;
+    let isColorDuplicate = val => (
+      colors.some(
+        color => color.name === val.name
+      )
+    );
+    while(isDuplicateColor){
+      rand = Math.floor(Math.random() * allColors.length);
+      randColor = allColors[rand];
+      isDuplicateColor = isColorDuplicate(randColor);
+    }
+    console.log(randColor);
     setColors([...colors, randColor]);
   }
     
@@ -103,7 +114,7 @@ export default function PaletteForm(props) {
             <Button
               variant="contained"
               color="primary"
-              onClick={randomColor}
+              onClick={addRandomColor}
               disabled={isPaletteFull}
               className={classes.btn}
             >

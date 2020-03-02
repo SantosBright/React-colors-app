@@ -35,15 +35,17 @@ function PaletteFormNav({ open, palettes, handleDrawerOpen, handleSubmit, handle
                 })}
             >
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(classes.menuButton, open && classes.hide)}
-                    >
-                        {!open && <AddToPhotosIcon />}
-                    </IconButton>
+                    {!open && 
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            className={clsx(classes.menuButton, open && classes.hide)}
+                        >
+                            <AddToPhotosIcon />
+                        </IconButton>
+                    }
                     <Typography variant="h6" noWrap>
                         Create A Palette
                     </Typography>
