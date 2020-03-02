@@ -11,6 +11,7 @@ import DraggableColorList from './DraggableColorList';
 import arrayMove from 'array-move';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
+import seedColors from './seedColors';
 
 
 export default function PaletteForm(props) {
@@ -18,7 +19,7 @@ export default function PaletteForm(props) {
   const [open, setOpen] = React.useState(true);
   const [currentColor] = React.useState("teal");
   const [newColorName, setNewColorName] = React.useState("");
-  const [colors, setColors] = React.useState(props.palettes[0].colors);
+  const [colors, setColors] = React.useState(seedColors[0].colors);
 
   const addNewColor = newColor => {
     setColors([...colors, newColor]);
