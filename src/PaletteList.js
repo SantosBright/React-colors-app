@@ -19,7 +19,7 @@ function PaletteList(props) {
     const [open, setOpen] = React.useState(false);
     const [deleteId, setDeleteId] = React.useState("");
     const classes = useStyles();
-    const { palettes } = props;
+    const { palettes, handleDirection } = props;
 
     const goToPalette = id => {
         props.history.push(`/palette/${id}`);
@@ -44,7 +44,12 @@ function PaletteList(props) {
             <div className={classes.container}>
                 <nav className={classes.nav}>
                     <h1>React Colors</h1>
-                    <Link to="/palette/new">Create Palette</Link>
+                    <Link
+                        to="/palette/new"
+                        onClick={handleDirection.bind(this, 'rtl')}
+                    >
+                        Create Palette
+                    </Link>
                 </nav>
                 <TransitionGroup className={classes.palettes}>
                     {palettes.map(palette => (

@@ -28,6 +28,7 @@ export default function FormDialog({ palettes, handleSubmit, hideForm }) {
             emoji: emoji.native
         };
         handleSubmit(newPalette);
+        setStage("");
     }
 
     useEffect(() => {

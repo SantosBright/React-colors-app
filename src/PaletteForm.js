@@ -67,6 +67,7 @@ export default function PaletteForm(props) {
         palettes={props.palettes}
         handleSubmit={handleSubmit}
         handleDrawerOpen={handleDrawerOpen}
+        handleDirection={props.handleDirection}
       />
       <Drawer
         className={classes.drawer}

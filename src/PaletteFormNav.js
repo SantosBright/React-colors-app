@@ -12,7 +12,7 @@ import useStyles from './styles/PaletteFormNavStyles';
 import PaletteMetaForm from './PaletteMetaForm';
 
 
-function PaletteFormNav({ open, palettes, handleDrawerOpen, handleSubmit }) {
+function PaletteFormNav({ open, palettes, handleDrawerOpen, handleSubmit, handleDirection }) {
     const classes = useStyles();
     const [formShowing, setFormShowing] = React.useState(false);
 
@@ -49,7 +49,7 @@ function PaletteFormNav({ open, palettes, handleDrawerOpen, handleSubmit }) {
                     </Typography>
                 </Toolbar>
                 <div className={classes.navBtns}>
-                    <Link to="/">
+                    <Link to="/" onClick={handleDirection.bind(this, 'ltr')}>
                         <Button
                             variant="contained"
                             color="secondary"
