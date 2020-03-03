@@ -3,10 +3,10 @@ import './styles/Page.css';
 
 const Page = ({ children, direction }) => {
     return (
-        <section className={`${direction} page `}>
+        <section className={`${direction} page`}>
             {children}
         </section>
     );
-}
+};
 
 export default Page;

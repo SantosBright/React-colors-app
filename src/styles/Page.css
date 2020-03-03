@@ -14,17 +14,15 @@
 .page-exit-active{
     opacity: 0;
 }
-
+/* 
 .rtl.page-enter {
     transform: translateX(100%);
-    opacity: 1;
 }
 .rtl.page-enter-active{
     transform: translateX(0);
 }
 .rtl.page-exit-active{
     transform: translateX(-100%);
-    opacity: 1;
 }
 
 .ltr.page-enter {
@@ -35,4 +33,4 @@
 }
 .ltr.page-exit-active{
     transform: translateX(100%);
-}
+} */
