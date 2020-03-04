@@ -46,7 +46,7 @@ function PaletteFormNav({ open, palettes, handleDrawerOpen, handleSubmit, handle
                             <AddToPhotosIcon />
                         </IconButton>
                     }
-                    <Typography variant="h6" noWrap>
+                    <Typography variant="h6" className={classes.typoHead} noWrap>
                         Create A Palette
                     </Typography>
                 </Toolbar>

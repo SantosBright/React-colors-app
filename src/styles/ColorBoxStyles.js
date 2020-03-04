@@ -22,11 +22,11 @@ export default {
             height: props => props.showFullPalette ? '10%' : '20%',
             // marginBottom: '-0.255rem'
         },
-        [sizes.down('xs')]: {
-            width: '100%',
-            height: props => props.showFullPalette ? '5%' : '10%',
-            marginBottom: props => props.showFullPalette ? '-0.256rem' : '-0.289rem'
-        }
+        // [sizes.down('xs')]: {
+        //     width: '100%',
+        //     height: props => props.showFullPalette ? '5%' : '10%',
+        //     marginBottom: props => props.showFullPalette ? '-0.256rem' : '-0.289rem'
+        // }
     },
     copyText: {
         color: props => 
