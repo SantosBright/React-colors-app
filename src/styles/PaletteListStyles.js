@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors';
 import sizes from './sizes';
+import bg from './bg.svg';
 
 
 export default makeStyles({
@@ -18,11 +19,14 @@ export default makeStyles({
         }
     },
     root: {
-        backgroundColor: 'blue',
-        height: '100%',
+        height: '100vh',
         display: 'flex',
         alignItems: 'flex-start',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        // background by SVGBackgrounds.com2
+        backgroundColor: "#394bad",
+        backgroundImage: `url(${bg})`,
+        overflowY: 'scroll'
     },
     container:{
         width: '50%',
@@ -47,6 +51,10 @@ export default makeStyles({
         alignItems: 'center',
         '& a': {
             color: 'white'
+        },
+        '& h1': {
+            fontSize: '2rem',
+            textShadow: '0 3px 2px black'
         }
     },
     palettes: {

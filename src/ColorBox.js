@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import clsx from 'clsx';
 import styles from './styles/ColorBoxStyles';
 
 
@@ -25,9 +26,14 @@ class ColorBox extends Component {
                 <div style={{background}} className={classes.ColorBox}>
                     <div
                         style={{background}}
-                        className={`${classes.copyOverlay} ${showing && classes.showOverlay}`}
+                        className={clsx(classes.copyOverlay, {
+                            [classes.showOverlay]: showing
+                        })}
                     />
-                    <div className={`${classes.copyMsg} ${showing && classes.showMsg}`}>
+                    <div className={clsx(classes.copyMsg, {
+                            [classes.showMsg]: showing
+                        })}
+                    >
                         <h1>Copied!</h1>
                         <p className={classes.copyText}>{background}</p>
                     </div>
