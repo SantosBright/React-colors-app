@@ -5,7 +5,7 @@ export default {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        height: '6vh',
+        height: '6.5%',
     },
     logo: {
         marginRight: '15px',

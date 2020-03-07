@@ -1,6 +1,6 @@
 .page{
-    /* height: 100vh;
-    position: fixed; */
+    height: 100vh;
+    position: fixed;
     width: 100%;
     top: 0;
     transition: opacity .5s ease-in-out, transform .3s ease-in-out;
@@ -13,6 +13,10 @@
 }
 .page-exit-active{
     opacity: 0;
+}
+html, body{
+    margin: 0;
+    padding: 0;
 }
 /* 
 .rtl.page-enter {

@@ -1,13 +1,12 @@
 export default {
     PaletteFooter: {
-        // backgroundColor: 'white',
-        height: '6vh',
+        backgroundColor: 'white',
+        height: '3.5%',
         display: 'flex',
         justifyContent: 'flex-end',
         alignItems: 'center',
         fontWeight: 'bold',
-        // backgroundColor:'red',
-        fontSize: '1.3rem'
+        margin: 0
     },
     emoji: {
         fontSize: '1.2rem',
